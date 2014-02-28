@@ -29,8 +29,18 @@ Run seed trask
 rake core:seed
 ```
 
+Run mailcatcher in development
+
+```console
+gem install mailcatcher
+mailcatcher
+```
+
+
 Run server
 
 ```console
 rails s
 ```
+
+Login as Admin User with email="admin@publish-it.com" and password=SYSADMIN
