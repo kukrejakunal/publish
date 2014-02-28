@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def require_permission(permission,model=nil,options = {})
     handler = options[:handler] || :unauthorized
     handler_params = !options[:handler].nil?? Array(options[:handler_params]) : nil
-    send(handler,*handler_params) unless user.can?(permission, model.present?? model : :all)
+    send(handler,*handler_params) unless current_user.can?(permission, model.present?? model : :all)
   end
 
   ## Default handler for unauthorized requests. Used by require_permission before filter

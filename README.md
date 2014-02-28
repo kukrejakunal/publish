@@ -44,3 +44,10 @@ rails s
 ```
 
 Login as Admin User with email="admin@publish-it.com" and password=SYSADMIN
+
+
+Remove old guest users
+
+```console
+rake core:remove_guest
+```

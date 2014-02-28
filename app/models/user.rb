@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
     self.roles.collect(&:id)
   end
 
+  scope :non_guest, where(:is_guest => false)
+
   def is_guest?
     is_guest
   end

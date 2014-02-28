@@ -4,7 +4,9 @@ class Admin::UsersController <  ApplicationController
   def index
     per_page = (params[:per_page] || 10).to_i
     page = (params[:page] || 1).to_i
-    scope = User
+
+    scope = User.non_guest
+
     @search_text = params[:search_text]
 
     if @search_text
