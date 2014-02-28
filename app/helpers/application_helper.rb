@@ -53,12 +53,16 @@ module ApplicationHelper
   private
 
   def guest_user
-    User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
+    begin User.find(session[:guest_user_id])
+    rescue
+      create_guest_user
+    end
   end
 
   def create_guest_user
     u = User.create(:name => "guest",:is_guest => true, :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
     u.save(:validate => false)
+    session[:guest_user_id] = u.id
     u
   end
 
