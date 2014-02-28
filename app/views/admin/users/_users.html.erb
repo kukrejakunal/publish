@@ -1,0 +1,31 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<% if @search_text %>
+    <div class="search_result_text">
+      <%= t("ADMIN_PAGES.USERS.SEARCH.RESULT_TEXT") %> <span class="query_highlight"><%= @search_text %></span>
+    </div>
+<% end %>
+
+
+<table class="table">
+  <thead>
+  <tr>
+    <th class="table_header_item id_column sort_column"><%= link_to sortable "id",t("ADMIN_PAGES.USERS.COLUMNS.ID"),User %></th>
+    <th class="table_header_item id_column sort_column"><%= link_to sortable "name",t("ADMIN_PAGES.USERS.COLUMNS.NAME"),User %></th>
+    <th class="table_header_item email_column sort_column"><%= link_to sortable "email",t("ADMIN_PAGES.USERS.COLUMNS.EMAIL"),User %></th>
+    <th class="table_header_item type_column sort_column"><%= t("ADMIN_PAGES.USERS.COLUMNS.ROLES") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td class="table_column_item id_column"><%=user.id %></td>
+      <td class="table_column_item id_column"><%= link_to user.name,edit_admin_user_path(user) %></td>
+      <td class="table_column_item email_column"><%=user.email %></td>
+      <td class="table_column_item type_column"><%= user.roles.pluck(:name).join(",") %></td>
+    </tr>
+  <% end  %>
+
+  </tbody>
+</table>

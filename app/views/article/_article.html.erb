@@ -1,0 +1,14 @@
+<!-- Article Partial-->
+<div class="article">
+  <div class="article_content">
+    <div class="article_info">
+      <h4 class="item_title">
+        <%=link_to article.title, article_path(article) %>
+      </h4>
+      <div class="topic_description">
+        <!-- Show 150 chars of body-->
+        <%= shorten_string(strip_tags(article.body), 150).html_safe %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<% content_for :header_title do  %>
+      <%= @article.title.titleize %>
+<% end %>
+
+<% content_for :contextual_buttons do %>
+      <%= link_to t('.back', :default => t("helpers.links.back")),article_index_path, :class => 'btn'  %>
+
+    <% if current_user.can_edit_article?(@article.user_id) && @article.is_in_draft? %>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_article_path(@article), :class => 'btn' %>
+
+        <%= link_to t('.mark_complete', :default => t("helpers.links.mark_complete")),
+                mark_complete_article_path(@article),:method => :put, :class => 'btn' %>
+    <% end %>
+
+    <% if current_user.can_publish_article? && @article.is_publishable?  %>
+        <%= link_to t('.publish', :default => t("helpers.links.publish")),
+                    publish_article_path(@article),:method => :put, :class => 'btn' %>
+    <% end %>
+
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                article_path(@article),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                :class => 'btn btn-danger' %>
+
+    <div class="article_author pull-right">
+      <span>By <%= @user.name%></span>
+    </div>
+
+    <div class="article_status pull-right">
+      <span class="label label-<%= status_label(@article.status) %>"><%= @article.status %>&nbsp;</span>
+    </div>
+
+<% end %>
+
+<%- model_class = Article -%>
+<div class="article">
+  <div class="article_content">
+    <%= @article.body%>
+  </div>
+</div>

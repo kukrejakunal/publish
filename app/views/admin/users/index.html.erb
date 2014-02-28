@@ -1,0 +1,28 @@
+<% content_for :header_title do  %>
+    <%= t("ADMIN_PAGES.USERS.TITLE") %>
+<% end %>
+<% content_for :contextual_buttons do %>
+    <% if current_user.can_update_role? %>
+        <%= link_to t('.new', :default => t("helpers.links.new_user")),
+                    new_admin_user_path,
+                    :class => 'btn btn-primary' %>
+    <% end %>
+<% end %>
+
+<div>
+  <%= form_tag admin_users_path, :method => 'get', :id => "users_search" do %>
+      <p>
+      <span><%= t("ADMIN_PAGES.USERS.SEARCH.LABEL") %></span>
+        <input type="text" name="search_text" id="users_search_text">
+        <%= submit_tag t("ADMIN_PAGES.USERS.SEARCH.BUTTON"), :name => nil,
+                       :class => "button button_primary" %>
+      </p>
+  <% end %>
+</div>
+<div id="users"><%= render 'users' %></div>
+
+<script type="text/javascript">
+    $(document).ready(function (){
+        init_admin_users_page();
+    });
+</script>

@@ -1,0 +1,27 @@
+<%= form_for :user, :url => form_action_path,:method => form_method do |f| %>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :email, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.email_field :email, :class => 'email_field' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :email, :class => 'control-label' %>
+      <div class="controls">
+        <% select_roles_options = Role.all.map{|role| ["#{role.name}", role.id]} %>
+        <%= f.select :roles, options_for_select(select_roles_options,@user.role_ids), {},
+                     {:multiple => true, :size=>10, :name => "user[role_ids][]"}%>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.submit :save, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  article_index_path, :class => 'btn' %>
+    </div>
+<% end %>

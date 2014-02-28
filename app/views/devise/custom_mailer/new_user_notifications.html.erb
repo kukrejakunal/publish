@@ -1,0 +1,8 @@
+<p>Dear <%= @user.name %>!</p>
+
+<p>Congratulations! Your PublishIT App account has been created under the email address <%= @user.email %></p>
+
+<p><%= link_to 'Change my password', edit_password_url(@user, :reset_password_token => @user.reset_password_token) %></p>
+
+<p>If you didn't request this, please ignore this email.</p>
+<p>Your password won't change until you access the link above and create a new one.</p>

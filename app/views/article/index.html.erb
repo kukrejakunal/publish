@@ -1,0 +1,22 @@
+<%- model_class = Article -%>
+
+<% content_for :header_title do  %>
+    <%= model_class.model_name.human.pluralize.titleize %>
+<% end %>
+<% content_for :contextual_buttons do %>
+    <% if current_user && current_user.can_add_article? %>
+        <%= link_to t('.new', :default => t("helpers.links.new_article")),
+                    new_article_path,
+                    :class => 'btn btn-primary' %>
+    <% end %>
+<% end %>
+
+<%= page_entries_info @articles %>
+    <div class="articles">
+    <% @articles.each do |article| %>
+        <%= render 'article', {:article => article}%>
+    <% end %>
+    </div>
+
+<%= will_paginate @articles %>
+

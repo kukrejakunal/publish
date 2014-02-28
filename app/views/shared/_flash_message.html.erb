@@ -1,0 +1,20 @@
+<% key = key.to_s %>
+<% key = "error" if key == "alert" %>
+<div class="message <%= key %>" id="flash_<%=timestamp%>" >
+  <% if key == "notice" %>
+      <div class="message_icon">
+        <span aria-hidden="true" class="icon_notice"></span>
+      </div>
+  <% elsif key == "success" %>
+      <div class="message_icon">
+        <span aria-hidden="true" class="icon_success"></span>
+      </div>
+  <% elsif key == "error" %>
+      <div class="message_icon">
+        <span aria-hidden="true" class="icon_error"></span>
+      </div>
+  <% end %>
+
+  <%= link_to "".html_safe, "#", :class => "close icon_close", "data-dismiss" => "alert" %>
+  <div class="message_text"><%= msg.to_s.html_safe %></div>
+</div>

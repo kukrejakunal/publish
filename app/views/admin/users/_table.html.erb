@@ -1,0 +1,31 @@
+<div class="user_info data_container">
+  <h4><%=  table_heading %></h4>
+  <table class="table user_table data_table" id="<%= table_id unless defined?(table_id).blank? %>" >
+    <thead>
+    <tr class="even">
+      <% table_columns.each do |column| %>
+          <th><%= column %></th>
+      <% end %>
+    </tr>
+    </thead>
+    <tbody>
+    <% tr_class=true %>
+    <% attributes.each do |attribute_row| %>
+        <% tr_class= !tr_class %>
+        <tr class="<%= tr_class ? "even" : "odd" %>">
+          <% table_columns.each_with_index do |column,index| %>
+              <% if attribute_row[index] or defined?(extra_columns).blank? %>
+                  <td><%= attribute_row[index] %></td>
+              <% end %>
+          <% end %>
+          <% if !defined?(extra_columns).blank? %>
+            <% extra_columns.each do |column| %>
+              <td><%= column %></td>
+            <% end %>
+          <% end %>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <div class="user_profile_table"></div>
+</div>

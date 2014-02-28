@@ -1,0 +1,18 @@
+<div class="contextual_buttons">
+  <%= yield :contextual_buttons %>
+</div>
+
+<div class="app_message">
+  <% flash.each do |key, msg|%>
+      <% if !msg.is_a?Array %>
+          <% timestamp = Time.now().strftime("%6N") %>
+          <%= render :partial => 'shared/flash_message', :locals => {:key => key, :msg => msg, :timestamp => timestamp} %>
+
+      <% else %>
+          <% msg.each do |m| %>
+              <% timestamp = Time.now().strftime("%6N") %>
+              <%= render :partial => 'shared/flash_message', :locals => {:key => key, :msg => m, :timestamp => timestamp} %>
+          <% end %>
+      <% end %>
+  <% end %>
+</div>

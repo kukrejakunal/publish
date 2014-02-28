@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    <%= content_for?(:page_title) ? (yield :page_title) : t("PROJECT_NAME") %>
+  </title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="<%= global_path(:home_index_path) %>"><%= t("PROJECT_NAME") %></a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <% if user_signed_in? && !current_user.is_guest? %>
+              <li><a>Signed in as <%= current_user.email %>. Not you? </a></li>
+              <li><%= link_to t("NAV_BAR.SIGN_OUT"), global_path(:destroy_user_session_path), :method => :delete %></li>
+              <% if current_user.can_update_role? %>
+                <li><%= link_to t("NAV_BAR.ADMIN"), global_path(:admin_users_path)%></li>
+              <% end %>
+          <% else %>
+              <li><%= link_to t("NAV_BAR.SIGN_UP"), global_path(:new_user_registration_path) %></li>
+              <li><%= link_to t("NAV_BAR.SIGN_IN"), global_path(:new_user_session_path) %></li>
+          <% end %>
+          <li><%= link_to t("NAV_BAR.ARTICLE"), global_path(:article_index_path)%></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="span1"></div>
+    <div class="span9">
+      <%= render 'shared/header' %>
+      <%= render 'shared/contextual_header' %>
+      <%= yield %>
+    </div>
+    <div class="span2">
+      <h3>About Us</h3>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

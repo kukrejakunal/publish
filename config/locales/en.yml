@@ -1,0 +1,25 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  PROJECT_NAME: "PublishIT"
+  NAV_BAR:
+    SIGN_IN: "Sign In"
+    SIGN_OUT: "Sign Out"
+    SIGN_UP: "Sign Up"
+    ADMIN: "Admin"
+    ARTICLE: "Article"
+  HOME:
+    TITLE: "Home"
+  ADMIN_PAGES:
+    USERS:
+      TITLE: "Users"
+      SEARCH:
+        LABEL: "Search"
+        BUTTON: "Go"
+        RESULT_TEXT: "Showing Result for"
+      COLUMNS:
+        ID: "ID"
+        NAME: "Name"
+        EMAIL: "Email"
+        ROLES: "ROLES"
