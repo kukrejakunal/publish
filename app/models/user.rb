@@ -52,6 +52,16 @@ class User < ActiveRecord::Base
     @ability
   end
 
+  ## method for clearing ability cache for the User with id
+  # given as params
+  def self.clear_ability_cache(user_id=nil)
+    if user_id.blank?
+      Rails.cache.delete_matched('^ability_')
+    else
+      Rails.cache.delete("ability_#{user_id}")
+    end
+  end
+
   def can_view_completed_article?
     can? PERMISSIONS[:ARTICLE][:COMPLETED], :all
   end
@@ -60,8 +70,8 @@ class User < ActiveRecord::Base
     can? PERMISSIONS[:USER][:UPDATE], :all
   end
 
-  def can_delete_article?(article_user_id)
-    article_user_id == self.id && can?(PERMISSIONS[:ARTICLE][:DELETE], :ARTICLE)
+  def can_delete_article?
+    can?(PERMISSIONS[:ARTICLE][:DELETE], :ARTICLE)
   end
 
   def can_edit_article?(article_user_id)

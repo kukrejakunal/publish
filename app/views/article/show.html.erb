@@ -18,11 +18,13 @@
                     publish_article_path(@article),:method => :put, :class => 'btn' %>
     <% end %>
 
+    <% if current_user.can_delete_article?  %>
     <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                 article_path(@article),
                 :method => 'delete',
                 :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                 :class => 'btn btn-danger' %>
+    <% end %>
 
     <div class="article_author pull-right">
       <span>By <%= @user.name%></span>

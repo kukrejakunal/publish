@@ -52,7 +52,7 @@ class Admin::UsersController <  ApplicationController
     @user.update_attributes(params[:user])
 
     @user.roles = user_roles
-    @user.password = rand(999999).to_s.center(10, rand(9).to_s)
+    User.clear_ability_cache(@user.id)
 
     if @user.save
       @user.send_new_user_notifications
